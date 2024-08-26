@@ -166,22 +166,14 @@ def run_selenium(logpath: str, proxy: str, socksStr: str) -> Tuple[str, List, Li
     options = get_webdriver_options(proxy=proxy, socksStr=socksStr)
     service = get_webdriver_service(logpath=logpath)
     with webdriver.Chrome(options=options, service=service) as driver:
-        url = "https://www.unibet.fr/sport/hub/euro-2024"
+        url = "https://www.google.com/"
         try:
             driver.get(url)
             time.sleep(2)
             # Wait for the element to be rendered:
-            element = WebDriverWait(driver=driver, timeout=10).until(lambda x: x.find_elements(by=By.CSS_SELECTOR, value="h2.eventcard-content-name"))
-            name = element[0].get_property('attributes')[0]['name']
-            html_content = driver.page_source
-        except Exception as e:
-            st.error(body='Selenium Exception occured!', icon='🔥')
-            st.error(body=str(e), icon='🔥')
-        finally:
-            performance_log = driver.get_log('performance')
-            browser_log = driver.get_log('browser')
-    return name, performance_log, browser_log, html_content
-
+            button = WebDriverWait(driver=driver, timeout=5).until(lambda x: x.find_element(by=By.ID, value="gbqfbb"))
+            text = button.get_attribute('value')
+            st.write("writing: " + text)
 
 if __name__ == "__main__":
     if "proxy" not in st.session_state:
