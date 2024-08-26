@@ -1,1 +1,1 @@
-geckodriver
+firefox
