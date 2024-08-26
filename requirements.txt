@@ -1,3 +1,6 @@
+pandas
 streamlit
 selenium
-webdriver_manager
+requests
+lxml
+countryflag
