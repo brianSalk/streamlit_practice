@@ -73,22 +73,23 @@ def get_webdriver_service() -> Service:
     return service
 
 
-def run_selenium():
+def get_webdriver_():
     name = None
     html_content = None
     options = get_webdriver_options()
     service = get_webdriver_service()
-    with webdriver.Chrome(options=options, service=service) as driver:
-        url = "https://www.google.com/"
-        try:
-            driver.get(url)
-            time.sleep(2)
-            # Wait for the element to be rendered:
-            button = WebDriverWait(driver=driver, timeout=5).until(lambda x: x.find_element(by=By.ID, value="gbqfbb"))
-            text = button.get_attribute('value')
-            st.write("writing: " + text)
-        except Exception:
-            write('selenium aint workin')
+    return webdriver.Chrome(options=options, service=service)
 
 if __name__ == "__main__":
-    run_selenium()
+    driver = get_webdriver_()
+
+    url = "https://www.google.com/"
+    try:
+        driver.get(url)
+        time.sleep(2)
+        # Wait for the element to be rendered:
+        button = WebDriverWait(driver=driver, timeout=5).until(lambda x: x.find_element(by=By.ID, value="gbqfbb"))
+        text = button.get_attribute('value')
+        st.write("writing: " + text)
+    except Exception:
+        write('selenium aint workin')
