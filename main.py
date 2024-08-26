@@ -174,6 +174,8 @@ def run_selenium(logpath: str, proxy: str, socksStr: str) -> Tuple[str, List, Li
             button = WebDriverWait(driver=driver, timeout=5).until(lambda x: x.find_element(by=By.ID, value="gbqfbb"))
             text = button.get_attribute('value')
             st.write("writing: " + text)
+        except Exception:
+            write('selenium aint workin')
 
 if __name__ == "__main__":
     if "proxy" not in st.session_state:
